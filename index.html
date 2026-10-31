@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Rain Lamp – Customization Tester</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="topbar">
+            <h1>Rain Lamp tester</h1>
+            <label class="participant">
+                Participant
+                <input id="participant" type="text" placeholder="name or ID" />
+            </label>
+            <nav class="tabs">
+                <button id="tab-test" class="tab active">Test</button>
+                <button id="tab-results" class="tab">Results</button>
+            </nav>
+        </header>
+
+        <!-- Tester view: settings on the left, lamp preview on the right -->
+        <main id="view-test" class="layout">
+            <section id="settings">
+                <p class="intro">
+                    Adjust anything that would make this lamp better for you.
+                    Use the 👍 / 👎 next to a setting to say whether you would
+                    want it.
+                </p>
+                <div id="options"></div>
+            </section>
+
+            <aside id="preview">
+                <div class="lamp-wrap">
+                    <div class="ring"></div>
+                    <div id="lamp" class="lamp"></div>
+                    <button
+                        id="lamp-button"
+                        class="lamp-button"
+                        title="Press the lamp"
+                    >
+                        Press lamp
+                    </button>
+                </div>
+                <div id="lamp-status" class="lamp-status"></div>
+                <div id="scenario" class="scenario"></div>
+            </aside>
+        </main>
+
+        <!-- Results view: filled by the results script -->
+        <main id="view-results" class="hidden">
+            <div id="results"></div>
+        </main>
+
+        <script src="schema.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

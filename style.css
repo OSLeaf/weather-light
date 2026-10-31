@@ -1,0 +1,273 @@
+:root {
+    --bg: #12151c;
+    --panel: #1b2029;
+    --line: #2a3140;
+    --text: #e8ecf3;
+    --muted: #8d97a8;
+    --accent: #4da3ff;
+    /* Written by the simulator in Step 4 */
+    --lamp-color: #3a4150;
+    --lamp-glow: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font:
+        15px/1.4 system-ui,
+        sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+}
+.topbar h1 {
+    font-size: 18px;
+    margin: 0;
+    flex: 1;
+}
+.participant {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+}
+.participant input {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+.tabs {
+    display: flex;
+    gap: 4px;
+}
+.tab {
+    background: none;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.tab.active {
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+/* ---------- Layout ---------- */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+}
+#preview {
+    position: sticky;
+    top: 16px;
+    align-self: start;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+}
+.intro {
+    color: var(--muted);
+    margin-top: 0;
+}
+
+/* ---------- Lamp preview ---------- */
+.lamp-wrap {
+    position: relative;
+    height: 170px;
+    display: grid;
+    place-items: center;
+}
+.ring {
+    position: absolute;
+    top: 4px;
+    width: 46px;
+    height: 46px;
+    border: 5px solid #9aa4b5;
+    border-radius: 50%;
+}
+.lamp {
+    width: 96px;
+    height: 96px;
+    margin-top: 40px;
+    border-radius: 50%;
+    background: var(--lamp-color);
+    box-shadow: 0 0 calc(var(--lamp-glow) * 60px) calc(var(--lamp-glow) * 18px)
+        var(--lamp-color);
+    border: 3px solid #0d0f14;
+    transition:
+        background 0.3s,
+        box-shadow 0.3s;
+}
+.lamp-button {
+    position: absolute;
+    bottom: 0;
+}
+.lamp-button,
+.scenario button {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.lamp-status {
+    text-align: center;
+    color: var(--muted);
+    min-height: 2.8em;
+    margin: 10px 0;
+}
+.scenario {
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+}
+
+/* ---------- Settings ---------- */
+details.category {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+details.category > summary {
+    padding: 12px 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.option {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-top: 1px solid var(--line);
+}
+.option .label {
+    color: var(--text);
+}
+.option .control select,
+.option .control input[type="text"],
+.option .control input[type="time"] {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 5px 7px;
+}
+.option .value {
+    color: var(--muted);
+    font-size: 13px;
+    margin-left: 6px;
+}
+.want {
+    display: flex;
+    gap: 4px;
+}
+.want button {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 3px 7px;
+    cursor: pointer;
+    filter: grayscale(1);
+    opacity: 0.6;
+}
+.want button.on {
+    filter: none;
+    opacity: 1;
+    border-color: var(--accent);
+}
+
+/* ---------- Narrow screens: preview pinned on top ---------- */
+@media (max-width: 800px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+    #preview {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        padding: 8px;
+    }
+    .lamp-wrap {
+        height: 120px;
+    }
+    .lamp {
+        width: 64px;
+        height: 64px;
+        margin-top: 30px;
+    }
+    .ring {
+        width: 30px;
+        height: 30px;
+    }
+    .scenario {
+        display: none;
+    } /* scenario controls move into the page on small screens in Step 4 */
+}
+.option.gate {
+    background: #20293a;
+}
+.option.gate .label {
+    font-weight: 600;
+}
+/* Tooltips on option labels */
+.option .label[data-tip] {
+    position: relative;
+    cursor: help;
+    outline: none;
+}
+.option .label[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 20;
+    width: max-content;
+    max-width: min(320px, 80vw);
+    margin-top: 4px;
+    padding: 8px 10px;
+    background: #0d0f14;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 400;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.12s;
+}
+.option .label[data-tip]:hover::after,
+.option .label[data-tip]:focus::after {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.3s; /* short delay so tooltips do not flash while scanning the list */
+}
